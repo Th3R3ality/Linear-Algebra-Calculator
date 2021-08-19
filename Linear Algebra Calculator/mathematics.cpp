@@ -74,14 +74,14 @@ int main()
         }
         else if (type == "reg") {
             std::vector<double> x, y;
-            double r, b;
-            printf("enter x values (non-numbers to continue)\n%zu", x.size());
+            double r;
+            printf("enter x values (non-numbers to continue)\n");
             x = fillVector(x);
             printf("enter y values (non-numbers to continue)\n");
             y = fillVector(y);
 
-            std::tie(r, b) = regression(x, y);
-            printf("r: %f\tb: %f\n", r, b);
+            r = pearson(x, y);
+            printf("r: %f\n", r);
         }
         else if (type == "q" || type == "quit") {
             f.close();

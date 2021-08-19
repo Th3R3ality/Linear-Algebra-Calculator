@@ -31,28 +31,6 @@ double constant(double x, double y) {
 	return y / x;
 }
 
-std::tuple<double, double>regression(std::vector<double> x, std::vector<double> y) {
-	double r = 0, b = 0, rTemp = 0, bTemp = 0;
-	std::cout << x.size() << "\n" << y.size() << std::endl;
-	size_t max = 0;
-	for (int i = 0; i < x.size(); i++) {
-		if (i + 1 >= x.size()) {
-			max = x.size();
-		}
-		else {
-			max = 0;
-		}
-		std::tie(rTemp, bTemp) = linearxy(x[i], y[i], x[i + 1 - max], y[i + 1 - max]);
-		r += rTemp;
-		b += bTemp;
-
-		
-	}
-	if (r != 0) r /= x.size();
-	if (b != 0) b /= x.size();
-	return {r, b};
-}
-
 std::vector<double> fillVector(std::vector<double> x) {
 	double Temp;
 	while (std::cin >> Temp) {
@@ -89,7 +67,7 @@ double pearson(std::vector<double> x, std::vector<double> y) {
 		xxM2_sum += xxM2[i];
 		yyM2_sum += yyM2[i];
 	}
-	
+	r = xyM_sum / sqrt(xxM2_sum * yyM2_sum);
 
 
 	return r;
