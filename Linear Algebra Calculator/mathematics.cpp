@@ -118,6 +118,32 @@ int main()
             std::tie(r, a, b) = regression(x, y, p);
 
             printf("r: %f\ta: %f\tb: %f\n", r, a, b);
+
+            std::cout << "x = [";
+            for (int i = 0; i < x.size() - 1; i++) {
+                std::cout << x[i] << ", ";
+            }
+            std::cout << x[x.size() - 1] << "]\n";
+
+            std::cout << "y = [";
+            for (int i = 0; i < y.size() - 1; i++) {
+                std::cout << y[i] << ", ";
+            }
+            std::cout << y[y.size() - 1] << "]\n";
+
+            f << "x = [";
+            for (int i = 0; i < x.size() - 1; i++) {
+                f << x[i] << ", ";
+            }
+            f << x[x.size() - 1] << "]\n";
+
+            f << "y = [";
+            for (int i = 0; i < y.size() - 1; i++) {
+                f << y[i] << ", ";
+            }
+            f << y[y.size() - 1] << "]\n";
+
+            
             f << "r: " << r << "\na: " << a << "\nb: " << b << "\n" << std::endl;
             std::cin.clear();
         }

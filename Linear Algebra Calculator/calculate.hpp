@@ -79,7 +79,6 @@ std::tuple<double, double, double>regression(std::vector<double> &x, std::vector
 	}
 	printf("xM = %f\tyM = %f\t\t\t\t\t\E = %f\tE = %f\tE = %f\n\n", xM, yM, xyM_sum, xxM2_sum, yyM2_sum);
 
-
 	r = xyM_sum / sqrt(xxM2_sum * yyM2_sum);
 
 	Sy = sqrt(yyM2_sum / (n - 1));
