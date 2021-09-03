@@ -5,14 +5,14 @@
 #include "calculate.hpp"
 
 bool checkFile(const char* name) {
-    std::ifstream f("answers.txt", std::ios::in);
+    std::ifstream f("svar.txt", std::ios::in);
     if (f.fail()) {
-        printf("didn't find an answers file\n");
+        printf("kunne ikke finde svar fil\n");
         f.close();
         return 0;
     }
     else {
-        printf("found answers file\n");
+        printf("fandt svar fil\n");
         f.close();
         return 1;
     }
@@ -39,24 +39,25 @@ int main()
 {
     std::fstream f;
     if (checkFile("answers.txt")) {
-        printf("opening answers file\n");
-        f.open("answers.txt", std::ios::app);
+        printf("åbner svar fil\n");
+        f.open("svar.txt", std::ios::app);
     }
     else {
-        printf("creating answers file\n");
-        f.open("answers.txt", std::ios::out);
+        printf("laver svar fil\n");
+        f.open("svar.txt", std::ios::out);
     }
 
-    Sleep(2000);
+    Sleep(1500);
     clearCon();
     std::string type;
     while (true) {
-        printf("\n\nplease enter what mode you want\n");
-        printf("\tget a & b with x & y in linear function (xy)\n");
-        printf("\tget intersection of 2 linear functions with a & b (inter)\n");
-        printf("\tget a in constant linear function from 1 point (const)\n");
-        printf("\tcalculate linear regression a, x & b from array (reg)\n");
-        printf("\tq / quit to exit\tc / clear to clear console\n");
+        printf("\n\nvælg hvad du vil regne / skriv hvad det der står i (parenteserne)\n");
+        printf("\t udregn a & b ud fra 2 punkter (xy)\n");
+        printf("\tfind skæringspunktet med 2 a & b vaerdier (inter)\n");
+        printf("\tfind den konstante haeldning ud fra 1 punkt (konst)\n");
+        printf("\tudregn den linaere regression a/r, x & b fra en maengde x og y vaerdier (reg)\n");
+        printf("\tfind y vaerdien/haeldningen med given a, b og x (axb)\n");
+        printf("\tq / quit for at lukke programmet\tc / clear for at rydde skaermen\n");
         
 
         type = "";
@@ -66,7 +67,7 @@ int main()
 
         if (type == "xy") {
             double x1, y1, x2, y2, a, b;
-            printf("\t\tPlease enter 4 numbers, 2 x & 2 y values!\n");
+            printf("\t\tSkriv 2 punkter med x & y\n");
 
 
             std::cin >> x1 >> y1 >> x2 >> y2;
@@ -78,7 +79,7 @@ int main()
         }
         else if (type == "inter") {
             double x, a1, b1, a2, b2;
-            printf("\t\tplease enter 4 numbers 2 a & 2 b variables\n");
+            printf("\t\tSkriv 2 a & b vaerdier\n");
 
             std::cin >> a1 >> b1 >> a2 >> b2;
             x = intersection(a1, b1, a2, b2);
@@ -87,22 +88,22 @@ int main()
             f << "a1: " << a1 << "\tb1: " << b1 << "\ta2: " << a2 << "\tb2: " << b2 << "\nx: " << x << "\n" << std::endl;
             std::cin.clear();
         }
-        else if (type == "const") {
+        else if (type == "konst") {
             double x, y, k;
-            printf("\t\tplease enter 2 numbers, x & y\n");
+            printf("\t\tSkriv 1 punkt\n");
 
             std::cin >> x >> y;
             k = constant(x, y);
 
-            printf("\nx: %f\ty: %f\nconstant: %f\n", x, y, k);
-            f << "x: " << x << "\ty: " << y << "\nconstant: " << k << "\n" << std::endl;
+            printf("\nx: %f\ty: %f\nkonstant: %f\n", x, y, k);
+            f << "x: " << x << "\ty: " << y << "\nkonstant: " << k << "\n" << std::endl;
             std::cin.clear();
         }
         else if (type == "reg") {
             std::vector<double> x, y;
             double r, a, b;
             char p; std::string pTemp;
-            printf("enter x values (non-numbers to continue / p to print)\n");
+            printf("Skriv dine x vaerdier (bogstaver for at gå videre / p for at se mellem regninger)\n");
             x = fillVector(x);
             std::cin >> pTemp;
             if (pTemp[0] == 'p') {
@@ -112,7 +113,7 @@ int main()
                 p = 'x';
             }
             std::cin.clear();
-            printf("enter y values\n");
+            printf("Skriv dine y vaerdier\n");
             y = fillVector(y, x.size());
             
             std::tie(r, a, b) = regression(x, y, p);
@@ -147,6 +148,14 @@ int main()
             f << "r: " << r << "\na: " << a << "\nb: " << b << "\n" << std::endl;
             std::cin.clear();
         }
+        else if (type == "abx") {
+            printf("indtast a, x og b vaerdierne\n");
+            double a, b, x, y;
+            std::cin >> a >> b >> x;
+            y = a * x + b;
+            printf("a: %f\tb: %f\tx: %f\ny: %f", a, b, x, y);
+            f << "a: " << a << "\tb: " << b << "\tx: " << x << "\ny: " << y << std::endl;
+        }
         else if (type[0] == 'q') {
             f.close();
             std::cin.clear();
@@ -158,7 +167,7 @@ int main()
         }
         else {
             std::cin.clear();
-            printf("\nplease enter a valid mode\n\n");
+            std::cout << "\ntype: " << type << "\ter ikke en gyldig type\n" << std::endl;
         }
     }
 }
