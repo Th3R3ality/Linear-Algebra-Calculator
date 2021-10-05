@@ -24,7 +24,7 @@ std::tuple<double, double>linearxy(double x1, double y1, double x2, double y2)
 }
 
 double intersection(double a1, double b1, double a2, double b2) {
-	return (b2 - b1) / (a2 - a1);
+	return (b2 - b1) / (a1 - a2);
 }
 
 double constant(double x, double y) {
@@ -91,4 +91,14 @@ std::tuple<double, double, double>regression(std::vector<double> &x, std::vector
 	
 
 	return {r, a, b};
+}
+
+std::tuple<double, double>determinant(double a1, double a2, double b1, double b2, double c1, double c2) {
+	double x = 0, y = 0;
+
+	x = (c1 * b2 - c2 * b1) / (a1 * b2 - a2 * b1);
+
+	y = (a1 * c2 - a2 * c1) / (a1 * b2 - a2 * b1);
+
+	return { x, y };
 }

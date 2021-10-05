@@ -57,6 +57,7 @@ int main()
         printf("\tfind den konstante haeldning ud fra 1 punkt (konst)\n");
         printf("\tudregn den linaere regression a/r, x & b fra en maengde x og y vaerdier (reg)\n");
         printf("\tfind y vaerdien/haeldningen med given a, b og x (axb)\n");
+        printf("\tfind x og y med 2 ukendte variabler via determinent metoden (det)\n");
         printf("\tq / quit for at lukke programmet\tc / clear for at rydde skaermen\n");
         
 
@@ -156,6 +157,20 @@ int main()
             printf("a: %f\tb: %f\tx: %f\ny: %f", a, b, x, y);
             f << "a: " << a << "\tb: " << b << "\tx: " << x << "\ny: " << y << std::endl;
         }
+        else if (type == "det") {
+            printf("indtast a1, b1, c1, a2, b2 og c2\n");
+            double a1, a2, b1, b2, c1, c2, x, y;
+            std::cin >> a1 >> b1 >> c1 >> a2 >> b2 >> c2;
+            std::tie(x, y) = determinant(a1, a2, b1, b2, c1, c2);
+            std::cout << "\na1: " << a1 << "\tb1: " << b1 << "\tc1: " << c1 << 
+                "\na2: " << a2 << "\tb2: " << b2 << "\tc2: " << c2 <<
+                "\nx: " << x << "\ty: " << y << std::endl;
+
+            f << "\na1: " << a1 << "\tb1: " << b1 << "\tc1: " << c1 <<
+                "\na2: " << a2 << "\tb2: " << b2 << "\tc2: " << c2 <<
+                "\nx: " << x << "\ty: " << y << std::endl;
+        }
+
         else if (type[0] == 'q') {
             f.close();
             std::cin.clear();
